@@ -1,0 +1,49 @@
+﻿
+body {
+    text-align: center;
+    font-family: Trattatello;
+    color: #f21;
+    background-image: url(http://image.ibb.co/d565px/mountain_at_night_wallpaper_1280x768.jpg);
+}
+
+h1 {
+    font-family: Monoton;
+    font-size: 70px;
+    margin: 0.2em;
+}
+
+h2 {
+    margin: 1em 0 0.25em;
+}
+
+    h2:first-of-type {
+        margin-top: 1.45em;
+    }
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    border: 1px solid gray;
+    background-color: white;
+    width: 25px;
+}
+
+tr {
+    height: 25px;
+}
+
+input[type="number"] {
+    width: 4em;
+}
+
+p {
+    color: #fff;
+}
+
+    p span {
+        margin-top: 40px;
+        font-weight: bold;
+    }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>{{title}}</title>
+    <style>
+        .error { color: red; } 
+    
+    </style>
+    </head>
+    <body>
+<br>
+        <nav>
+            <div style="float:left;">
+                <a href="/">Home</a>
+                <a href="/art">All Art</a>
+                <a href="/newart">New Art</a>
+            </div>
+            <div style="float:right;">
+                <a href='/login'>Log In</a>
+                <a href='/logout'>Log Out</a>
+            </div>
+        </nav>
+<br>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+        {% for category, messages in messges %}
+            <li class="{{category}}">{{message}}</li>
+        </ul>
+    </body>
+</html>
