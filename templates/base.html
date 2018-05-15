@@ -26,6 +26,12 @@
         <ul>
         {% for category, messages in messges %}
             <li class="{{category}}">{{message}}</li>
+        {% endfor %}
         </ul>
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+    
     </body>
 </html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Created Pixel Art</h1>
+    <ul>
+        {% for art in pixel art %}
+            <li>
+                <h2><a href='/art?id={{ art.id }}'>{{ art.id }}</a></h2> 
+                <p>{{ art.body }}</p>
+                <small><i>Created by</i><a href='/art?user= {{ art.user.username }}'>{{ art.user.username }}</a> {{ art.date }}</small>    
+            </li>
+            <hr />
+            {% endfor %}
+    </ul>
+
+    {% endblock %}
