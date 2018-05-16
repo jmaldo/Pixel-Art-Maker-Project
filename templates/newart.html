@@ -1,0 +1,17 @@
+{% extends "base.html"}
+
+{%block content %}
+
+<h1>Create Your Picture!</h1>
+
+<form action="/newart" method="POST">
+    <label>Name for New Picture</label></br>
+    <input type="text" name="title" value="{{ new_title }}"/>
+    <br><br><br>
+    <label>New Picture</label><br>
+    <textarea name="body" rows="10" cols="30">{{ new_body }}</textarea>
+    <br><br><br>
+    <input type="submit" value='Add Entry'/>
+</form>
+
+{% endblock %}
