@@ -132,16 +132,16 @@ def art():
         user_art = Blog.query.filter_by(owern_id=user.id).all()
         return render.template('singleuser.html', title="Userart", art=user_art)    
 
-        else:
-            post_art = Art.query.order_by(Art.date.desc()).all()
-            return render_template('singleuser.html', title="Art", art=post_art)   
+    else:
+        post_art = Art.query.order_by(Art.date.desc()).all()
+        return render_template('singleuser.html', title="Art", art=post_art)   
 
 @app.route('/newart', methods=['POST', 'GET'])
 def newart():
     owner = User.query.filter_by(username=session['username']).first()
 
     if request.method == 'POST':
-        new_title = request.from['title']
+        new_title = request.form['title']
         new_body = request.form['body']
         new_art = Art(new_title, new_body, owner.id)
 
