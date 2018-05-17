@@ -28,7 +28,7 @@ class Art(db.model):
             date = datetime.utcnow()
         self.date = date
 
-class User(db.Model)
+class User(db.Model): 
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
@@ -42,7 +42,7 @@ class User(db.Model)
 @app.before_request
 def require_login():
     allowed_routes = ['login', 'art', 'index', 'signup']
-    request.endpoint not in allowed_routes and 'username' not in session:
+    if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
 @app.route('/')
@@ -113,56 +113,56 @@ def signup():
                 return redirect('/newart')
             return render_template('signup.html', title="signup")
 
-        @app.route('/logout')
-        def logout():
-            del session['username']
-            return redirect('/art')
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect('/art')
 
-        @app.route('/art', methods=['POST', 'GET'])    
-        def art():
+@app.route('/art', methods=['POST', 'GET'])    
+def art():
 
-            user_username = reqest.args.get('user')
-            art_id = request.args.get('id')
+    user_username = reqest.args.get('user')
+    art_id = request.args.get('id')
 
-            if art_id:
-                art = Art.query.get(art_id)
-                return render_template('art.html', title="A Art", art=art)
-            elif user_username:
-                user = User.query.filter_by(username=user_username).first()
-                user_art = Blog.query.filter_by(owern_id=user.id).all()
-                return render.template('singleuser.html', title="Userart", art=user_art)    
+    if art_id:
+        art = Art.query.get(art_id)
+        return render_template('art.html', title="A Art", art=art)
+    elif user_username:
+        user = User.query.filter_by(username=user_username).first()
+        user_art = Blog.query.filter_by(owern_id=user.id).all()
+        return render.template('singleuser.html', title="Userart", art=user_art)    
 
-            else:
-                post_art = Art.query.order_by(Art.date.desc()).all()
-                return render_template('singleuser.html', title="Art", art=post_art)   
+        else:
+            post_art = Art.query.order_by(Art.date.desc()).all()
+            return render_template('singleuser.html', title="Art", art=post_art)   
 
-        @app.route('/newart', methods=['POST', 'GET'])
-        def newart():
-            owner = User.query.filter_by(username=session['username']).first()
+@app.route('/newart', methods=['POST', 'GET'])
+def newart():
+    owner = User.query.filter_by(username=session['username']).first()
 
-            if request.method == 'POST':
-                new_title = request.from['title']
-                new_body = request.form['body']
-                new_art = Art(new_title, new_body, owern.id)
+    if request.method == 'POST':
+        new_title = request.from['title']
+        new_body = request.form['body']
+        new_art = Art(new_title, new_body, owner.id)
 
-                is_error = False
+        is_error = False
 
-                if not new_title:
-                    flash('You need to enter a title', 'error')
-                    is_error = True
-                elif not new_body:
-                    flash('You need to enter draw something to post', 'error')
-                    is_error = True
+        if not new_title:
+            flash('You need to enter a title', 'error')
+            is_error = True
+        elif not new_body:
+            flash('You need to enter draw something to post', 'error')
+            is_error = True
 
-                    if is_error == True:
-                        return redirect('/newart')
+        if is_error == True:
+            return redirect('/newart')
 
-                else:
-                    db.session.add(new_art)
-                    db.session.commit()
-                    return redirect(url_for('art',id=str(new_art.id)))
+        else:
+            db.session.add(new_art)
+            db.session.commit()
+            return redirect(url_for('art',id=str(new_art.id)))
 
-            return render_template('newart.html', title = "newart")
+    return render_template('newart.html', title = "newart")
 
 if __name__=='__main__':
     app.run()
