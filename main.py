@@ -12,15 +12,15 @@ db = SQLAlchemy(app)
 
 app.secert_key = 'keyslayer'
 
-class Art(db.model):
+class Art(db.Model):
 
-    id = dbColumn(db.Integer, primary_key=True)
-    title = db.Column(db.string(120))
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))
     body = db.Column(db.Text)
-    owner_id = db.Column(db.Inetger, db.ForeginKey('user.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date = db.Column(db.DateTime)
 
-    def __init__(self, title, body, owner_id, date=none):
+    def __init__(self, title, body, owner_id, date=None):
         self.title = title
         self.body = body
         self.owner_id = owner_id
