@@ -5,7 +5,7 @@ from hashutils import make_pwd_hash, check_pw_hash
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://pixelart:root@localhost:8889/pixelart'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://pixelart:12345@localhost:8889/pixelart'
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
