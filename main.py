@@ -129,7 +129,7 @@ def art():
         return render_template('art.html', title="A Art", art=art)
     elif user_username:
         user = User.query.filter_by(username=user_username).first()
-        user_art = Blog.query.filter_by(owern_id=user.id).all()
+        user_art = art.query.filter_by(owern_id=user.id).all()
         return render.template('singleuser.html', title="Userart", art=user_art)    
 
     else:
