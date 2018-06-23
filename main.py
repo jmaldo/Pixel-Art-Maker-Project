@@ -49,7 +49,7 @@ def require_login():
 def index():
 
     users = User.query.order_by(User.username).all()
-    return render_template('index.html', title="Home", users = uers)
+    return render_template('index.html', title="Home", users = users)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -121,7 +121,7 @@ def logout():
 @app.route('/art', methods=['POST', 'GET'])    
 def art():
 
-    user_username = reqest.args.get('user')
+    user_username = request.args.get('user')
     art_id = request.args.get('id')
 
     if art_id:
